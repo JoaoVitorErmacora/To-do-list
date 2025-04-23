@@ -22,7 +22,7 @@ const updateProgress = () => {
   progressNumbers.textContent = `${completedTasks} / ${totalTasks}`;
 };
 
-const addTask = (event, completed = false) => {
+const addTask = (event, completed = false, checkCompletion = true) => {
   event.preventDefault();
 
   //TRIM -> Remove espaço na parte de tras e da frente da string
