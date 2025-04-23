@@ -89,3 +89,12 @@ taskInput.addEventListener("keypress", (event) => {
     addTask(event);
   }
 });
+
+const saveTaskLocalStorage = () => {
+  const savedTasks = Array.from(taskList.querySelector("li")).map((li) => ({
+    text: li.querySelector("span").textContent,
+    completed: li.querySelector(".checkbox").checked,
+  }));
+
+  localStorage.setItem("tasks", JSON.stringify(savedTasks));
+};
