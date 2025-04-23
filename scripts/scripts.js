@@ -103,3 +103,16 @@ const saveTaskLocalStorage = () => {
 
   localStorage.setItem("tasks", JSON.stringify(savedTasks));
 };
+
+const loadTaskFromLocalStorage = () => {
+  const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  savedTasks.forEach(({ text, completed }) => {
+    const fakeEvent = { preventDefault: () => {} };
+    taskInput.vakue = text;
+    addTask(fakeEvent, completed, false);
+  });
+
+  updateProgress();
+};
+
+loadTaskFromLocalStorage();
