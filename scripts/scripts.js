@@ -84,7 +84,7 @@ const addTask = (event, completed = false, checkCompletion = true) => {
   taskList.appendChild(li);
   taskInput.value = "";
   taskInput.focus();
-  updateProgress();
+  updateProgress(checkCompletion);
   saveTaskLocalStorage();
 };
 
@@ -96,19 +96,21 @@ taskInput.addEventListener("keypress", (event) => {
 });
 
 const saveTaskLocalStorage = () => {
-  const savedTasks = Array.from(taskList.querySelector("li")).map((li) => ({
+  const savedTasks = Array.from(taskList.querySelectorAll("li")).map((li) => ({
     text: li.querySelector("span").textContent,
     completed: li.querySelector(".checkbox").checked,
   }));
 
   localStorage.setItem("tasks", JSON.stringify(savedTasks));
+  console.log(localStorage.getItem("tasks"));
 };
 
 const loadTaskFromLocalStorage = () => {
   const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  console.log(savedTasks);
   savedTasks.forEach(({ text, completed }) => {
     const fakeEvent = { preventDefault: () => {} };
-    taskInput.vakue = text;
+    taskInput.value = text;
     addTask(fakeEvent, completed, false);
   });
 
