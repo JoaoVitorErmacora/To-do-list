@@ -55,6 +55,7 @@ const addTask = (event, completed = false) => {
     editBtn.style.opacity = "0.5";
     editBtn.style.pointerEvents = "none";
     updateProgress();
+    saveTaskLocalStorage();
   }
 
   checkbox.addEventListener("change", () => {
@@ -64,23 +65,27 @@ const addTask = (event, completed = false) => {
     editBtn.style.opacity = isChecked ? "0.5" : "1";
     editBtn.style.pointerEvents = isChecked ? "none" : "auto";
     updateProgress();
+    saveTaskLocalStorage();
   });
 
   editBtn.addEventListener("click", () => {
     taskInput.value = li.querySelector("span").textContent;
     li.remove();
     updateProgress();
+    saveTaskLocalStorage();
   });
 
   li.querySelector(".delete_btn").addEventListener("click", () => {
     li.remove();
     updateProgress();
+    saveTaskLocalStorage();
   });
 
   taskList.appendChild(li);
   taskInput.value = "";
   taskInput.focus();
   updateProgress();
+  saveTaskLocalStorage();
 };
 
 addTaskBtn.addEventListener("click", addTask);
